@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?><bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:conversion="http://camunda.org/schema/conversion/1.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" conversion:converterVersion="0.9.1-SNAPSHOT" exporter="Camunda Modeler" exporterVersion="1.14.0" expressionLanguage="http://www.w3.org/1999/XPath" id="Definitions_1" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.5.0" targetNamespace="http://bpmn.io/schema/bpmn" typeLanguage="http://www.w3.org/2001/XMLSchema">
+  <bpmn:collaboration id="Collaboration_1p2m9r2" isClosed="false">
+    <bpmn:participant id="Participant_04rmxfd" name="Our company" processRef="Process_1"/>
+  </bpmn:collaboration>
+  <bpmn:process id="Process_1" isClosed="false" isExecutable="false" processType="None">
+    <bpmn:laneSet>
+      <bpmn:lane id="Lane_03hwqgs" name="Hiring dept.">
+        <bpmn:flowNodeRef>Task_15dw2jq</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_0q5fpfr" name="HR dept.">
+        <bpmn:flowNodeRef>EndEvent_0j41qox</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_036z1m4</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_17gpqsm</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_12rv8v3</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="StartEvent_1" isInterrupting="true" name="Vacancy &#10;available" parallelMultiple="false">
+      <bpmn:outgoing>SequenceFlow_1rlnmmr</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task completionQuantity="1" id="Task_15dw2jq" isForCompensation="false" name="Report vacancy via e-mail" startQuantity="1">
+      <bpmn:incoming>SequenceFlow_1rlnmmr</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1okkg59</bpmn:outgoing>
+      <bpmn:property id="Property_0tp17sv" name="__targetRef_placeholder"/>
+      <bpmn:dataInputAssociation id="DataInputAssociation_18glu2j">
+        <bpmn:sourceRef>DataObjectReference_172cjys</bpmn:sourceRef>
+        <bpmn:targetRef>Property_0tp17sv</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+    </bpmn:task>
+    <bpmn:dataObjectReference dataObjectRef="DataObject_1obi6ci" id="DataObjectReference_172cjys" name="Excel Spreadsheet"/>
+    <bpmn:dataObject id="DataObject_1obi6ci" isCollection="false"/>
+    <bpmn:endEvent id="EndEvent_0j41qox" name="Vacancy &#10;filled">
+      <bpmn:incoming>SequenceFlow_0heuhzq</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_1rlnmmr" sourceRef="StartEvent_1" targetRef="Task_15dw2jq"/>
+    <bpmn:sequenceFlow id="SequenceFlow_1okkg59" sourceRef="Task_15dw2jq" targetRef="Task_036z1m4"/>
+    <bpmn:sequenceFlow id="SequenceFlow_0heuhzq" sourceRef="Task_12rv8v3" targetRef="EndEvent_0j41qox"/>
+    <bpmn:sequenceFlow id="SequenceFlow_0ewqukn" sourceRef="Task_036z1m4" targetRef="Task_17gpqsm"/>
+    <bpmn:sequenceFlow id="SequenceFlow_1bv8t0y" sourceRef="Task_17gpqsm" targetRef="Task_12rv8v3"/>
+    <bpmn:task completionQuantity="1" id="Task_036z1m4" isForCompensation="false" name="Advertise job" startQuantity="1">
+      <bpmn:incoming>SequenceFlow_1okkg59</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0ewqukn</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task completionQuantity="1" id="Task_17gpqsm" isForCompensation="false" name="Check applications" startQuantity="1">
+      <bpmn:incoming>SequenceFlow_0ewqukn</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1bv8t0y</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task completionQuantity="1" id="Task_12rv8v3" isForCompensation="false" name="Fill vacancy" startQuantity="1">
+      <bpmn:incoming>SequenceFlow_1bv8t0y</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0heuhzq</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:textAnnotation id="TextAnnotation_1bgmcxy" textFormat="text/plain">
+      <bpmn:text>Job ad (website, job sites,...)</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association associationDirection="None" id="Association_00v24r3" sourceRef="Task_036z1m4" targetRef="TextAnnotation_1bgmcxy"/>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane bpmnElement="Collaboration_1p2m9r2" id="BPMNPlane_1">
+      <bpmndi:BPMNShape bpmnElement="Participant_04rmxfd" id="Participant_04rmxfd_di">
+        <dc:Bounds height="340" width="872" x="31" y="20"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Lane_03hwqgs" id="Lane_03hwqgs_di">
+        <dc:Bounds height="181" width="842" x="61" y="20"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Lane_0q5fpfr" id="Lane_0q5fpfr_di">
+        <dc:Bounds height="159" width="842" x="61" y="201"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="StartEvent_1" id="StartEvent_13mzbel_di">
+        <dc:Bounds height="36" width="36" x="137" y="119"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="25" width="44" x="134" y="155"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Task_15dw2jq" id="Task_15dw2jq_di">
+        <dc:Bounds height="80" width="100" x="238" y="97"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="SequenceFlow_1rlnmmr" id="SequenceFlow_1rlnmmr_di">
+        <di:waypoint x="173" y="137"/>
+        <di:waypoint x="238" y="137"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0" width="0" x="206" y="112"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape bpmnElement="DataObjectReference_172cjys" id="DataObjectReference_172cjys_di">
+        <dc:Bounds height="50" width="36" x="270" y="27"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="25" width="63" x="189" y="33"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="DataInputAssociation_18glu2j" id="DataInputAssociation_18glu2j_di">
+        <di:waypoint x="288" y="77"/>
+        <di:waypoint x="288" y="97"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="SequenceFlow_1okkg59" id="SequenceFlow_1okkg59_di">
+        <di:waypoint x="338" y="137"/>
+        <di:waypoint x="358" y="137"/>
+        <di:waypoint x="358" y="271"/>
+        <di:waypoint x="378" y="271"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0" width="90" x="328" y="204"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape bpmnElement="TextAnnotation_1bgmcxy" id="TextAnnotation_1bgmcxy_di">
+        <dc:Bounds height="42" width="109" x="240" y="288"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="Association_00v24r3" id="Association_00v24r3_di">
+        <di:waypoint x="378" y="286"/>
+        <di:waypoint x="349" y="294"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="SequenceFlow_1bv8t0y" id="SequenceFlow_1bv8t0y_di">
+        <di:waypoint x="623" y="271"/>
+        <di:waypoint x="672" y="271"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0" width="90" x="602.5" y="256"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="SequenceFlow_0ewqukn" id="SequenceFlow_0ewqukn_di">
+        <di:waypoint x="478" y="271"/>
+        <di:waypoint x="523" y="271"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0" width="90" x="455.5" y="256"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape bpmnElement="EndEvent_0j41qox" id="EndEvent_0j41qox_di">
+        <dc:Bounds height="36" width="36" x="828.8831300813008" y="253"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="25" width="42" x="827" y="289"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="SequenceFlow_0heuhzq" id="SequenceFlow_0heuhzq_di">
+        <di:waypoint x="772" y="271"/>
+        <di:waypoint x="829" y="271"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0" width="90" x="755.5" y="256"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape bpmnElement="Task_036z1m4" id="Task_14k3new_di">
+        <dc:Bounds height="80" width="100" x="378" y="231"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Task_17gpqsm" id="Task_1tz67qm_di">
+        <dc:Bounds height="80" width="100" x="523" y="231"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Task_12rv8v3" id="Task_1576vmc_di">
+        <dc:Bounds height="80" width="100" x="672" y="231"/>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
